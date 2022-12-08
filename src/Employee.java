@@ -4,15 +4,19 @@ public class Employee {
     private final String patronymic;
     private int department;
     private int pay;
-    private static int id;
+    private final int id ;
     private static int counter = 0;
+   //
     public Employee(String surname,String name,String patronymic, int department, int pay){
         this.surname = surname;
+        this.id = counter++;
         this.name=name;
         this.patronymic = patronymic;
         this.department = department;
         this.pay = pay;
-        this.id = counter++;
+
+
+
 
     }
     public static void printEmployee(Employee[] employees){ //Печать всех сотрудников по списку
@@ -35,30 +39,32 @@ public class Employee {
 
     }
     public static void minPayEmployee(Employee[] employees){//метод для нахождения минимальной зарплаты
+         int a = 0;
         int min = 100000000;//такое большое число для того чтобы первая зарплата сразу же была меньше и зачислилась в переменную min
         for (int i = 0; i< employees.length;i++) {
             if (employees[i] != null) {
                 Employee employee = employees[i];
                 if (employee.getPay() < min) { //условия для нахождения минимального значения
                     min = employee.getPay();
-                    id = i;// номер сотрудника с наименьшей зарплатой
+                    a = i;// номер сотрудника с наименьшей зарплатой
                 }
             }
         }
-        System.out.println(employees[id] + " Это минимальная зарплата сотрудников компании.");//Печать минимального значения
+        System.out.println(employees[a] + " Это минимальная зарплата сотрудников компании.");//Печать минимального значения
     }
     public static void maxPayEmployee(Employee[] employees){//Нахождение максимального значения
+        int a = 0;
         int max = -100000000;//такое маленькое число для того чтобы первая же сразу зарплата попала в переменную
         for (int i = 0; i < employees.length;i++){
             if (employees[i] != null) {
             Employee employee = employees[i];
             if(employee.getPay() > max){// проверка на зарплату
                 max = employee.getPay();
-                id = i; // номер сотрудника с наибольшей зарплатой
+                a = i; // номер сотрудника с наибольшей зарплатой
             }
         }
         }
-        System.out.println(employees[id] + " Это максимальная зарплата сотрудников компании.");
+        System.out.println(employees[a] + " Это максимальная зарплата сотрудников компании.");
     }
     public static void nameSurnamePatronymic(Employee[] employees){// метод прописывающий ФИО
         for (int i = 0; i < employees.length;i++) {
@@ -94,7 +100,7 @@ public class Employee {
     }
     @Override
     public String toString() {
-        return "Имя сотрудника: "+ surname + name + patronymic +" Отдел: "+ department + " Зарплата: " + pay;
+        return "Номер: " + id +" Имя сотрудника: "+ surname + name + patronymic +" Отдел: "+ department + " Зарплата: " + pay;
     }
 
 }
